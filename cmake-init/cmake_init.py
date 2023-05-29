@@ -52,7 +52,7 @@ class Language:
 
 c_lang = Language("C", ["e", "s", "h"], ["90", "99", "11"], 1)
 
-cpp_lang = Language("C++", ["e", "h", "s"], ["11", "14", "17", "20"], 2)
+cpp_lang = Language("C++", ["e", "h", "s"], ["11", "14", "17", "20"], 3)
 
 
 def not_empty(value):
