@@ -8,3 +8,5 @@ prefix/
 **/.DS_Store
 CMakeLists.txt.user
 CMakeUserPresets.json
+compile_commands.json
+.cache
