@@ -81,12 +81,12 @@
       "description": "This preset makes sure the project actually builds with at least the specified standard",
       "hidden": true,
       "cacheVariables": {
+        "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
         "CMAKE_C{% if cpp %}XX{% end %}_EXTENSIONS": "OFF",
         "CMAKE_C{% if cpp %}XX{% end %}_STANDARD": "{= std =}",
         "CMAKE_C{% if cpp %}XX{% end %}_STANDARD_REQUIRED": "ON"{% if c and pm %},
         "CMAKE_CXX_EXTENSIONS": "OFF",
         "CMAKE_CXX_STANDARD": "11",
-        "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
         "CMAKE_CXX_STANDARD_REQUIRED": "ON"{% end %}
       }
     },
