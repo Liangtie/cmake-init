@@ -31,6 +31,14 @@
       }
     },{% if vcpkg %}
     {
+      "name": "release-mode",
+      "hidden": true,{% if not vcpkg %}
+      "inherits": "cmake-pedantic",{% end %}
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release"
+      }
+    },{% if vcpkg %}
+    {
       "name": "vcpkg",
       "hidden": true,
       "cacheVariables": {
@@ -78,6 +86,7 @@
         "CMAKE_C{% if cpp %}XX{% end %}_STANDARD_REQUIRED": "ON"{% if c and pm %},
         "CMAKE_CXX_EXTENSIONS": "OFF",
         "CMAKE_CXX_STANDARD": "11",
+        "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
         "CMAKE_CXX_STANDARD_REQUIRED": "ON"{% end %}
       }
     },
@@ -136,6 +145,12 @@
       "hidden": true
     },
     {
+        "name": "ci-win64-ninja",
+        "inherits": ["flags-windows", "ci-std"],
+        "generator": "Ninja",
+        "hidden": true
+    },
+    {
       "name": "coverage-linux",
       "binaryDir": "${sourceDir}/build/coverage",
       "inherits": "ci-linux",
@@ -184,6 +199,16 @@
     {
       "name": "ci-windows",
       "inherits": ["ci-build", "ci-win64", "dev-mode"{% if pm %}, "{= pm_name =}"{% if vcpkg %}, "vcpkg-win64-static"{% end %}{% end %}]
+    }
+    ,
+    {
+      "name": "ci-windows-ninja",
+      "inherits": ["ci-build", "ci-win64-ninja", "dev-mode"{% if pm %}, "{= pm_name =}"{% if vcpkg %}, "vcpkg-win64-static"{% end %}{% end %}]
+    }
+    ,
+    {
+      "name": "ci-windows-ninja-release",
+      "inherits": ["ci-build", "ci-win64-ninja", release-mode , "{= pm_name =}"{% if vcpkg %}, "vcpkg-win64-static"{% end %}{% end %}]
     }
   ]
 }
