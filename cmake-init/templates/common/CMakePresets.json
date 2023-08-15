@@ -208,7 +208,7 @@
     ,
     {
       "name": "ci-windows-ninja-release",
-      "inherits": ["ci-build", "ci-win64-ninja", "release-mode" , "{= pm_name =}"{% if vcpkg %}, "vcpkg-win64-static"{% end %}{% end %}]
+      "inherits": ["ci-build", "ci-win64-ninja", "release-mode" {% if pm %} , "{= pm_name =}"{% if vcpkg %}, "vcpkg-win64-static"{% end %}{% end %}]
     }
   ]
 }
