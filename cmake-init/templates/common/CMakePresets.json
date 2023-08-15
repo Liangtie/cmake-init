@@ -31,18 +31,18 @@
       }
     },{% if vcpkg %}
     {
+      "name": "vcpkg",
+      "hidden": true,
+      "cacheVariables": {
+        "CMAKE_TOOLCHAIN_FILE": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake"
+      }
+    },
+    {
       "name": "release-mode",
       "hidden": true,{% if not vcpkg %}
       "inherits": "cmake-pedantic",{% end %}
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "Release"
-      }
-    },{% if vcpkg %}
-    {
-      "name": "vcpkg",
-      "hidden": true,
-      "cacheVariables": {
-        "CMAKE_TOOLCHAIN_FILE": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake"
       }
     },
     {
@@ -145,10 +145,10 @@
       "hidden": true
     },
     {
-        "name": "ci-win64-ninja",
-        "inherits": ["flags-windows", "ci-std"],
-        "generator": "Ninja",
-        "hidden": true
+      "name": "ci-win64-ninja",
+      "inherits": ["flags-windows", "ci-std"],
+      "generator": "Ninja",
+      "hidden": true
     },
     {
       "name": "coverage-linux",
