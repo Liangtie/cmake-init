@@ -32,7 +32,7 @@ import subprocess
 import sys
 import zipfile
 
-__version__ = "0.36.1"
+__version__ = "0.37.1"
 
 is_windows = os.name == "nt"
 
@@ -178,6 +178,7 @@ library."""
         "catch3": False,
         "cpp_std": "",
         "msvc_cpp_std": "",
+        "c99": False,
     }
     package_manager = ask(
         "Package manager to use ([N]one/[c]onan/[v]cpkg)",
@@ -220,6 +221,8 @@ VCPKG_ROOT environment variable to be setup to vcpkg's root directory.""",
         else:
             d["cpp_std"] = d["std"]
             d["msvc_cpp_std"] = d["std"] if d["std"] != "11" else "14"
+    if d["c"] and d["std"] != "90":
+        d["c99"] = True
     return d
 
 
@@ -253,6 +256,8 @@ def should_install_file(name, d):
         return d["c_header"] and d["pm"]
     if name == "clang-14.profile":
         return d["conan"]
+    if name == "env.ps1" or name == "env.bat":
+        return d["lib"] and not d["pm"]
     return True
 
 
