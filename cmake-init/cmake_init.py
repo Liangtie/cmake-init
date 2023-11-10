@@ -32,7 +32,7 @@ import subprocess
 import sys
 import zipfile
 
-__version__ = "0.37.1"
+__version__ = "0.37.3"
 
 is_windows = os.name == "nt"
 
@@ -178,6 +178,7 @@ library."""
         "catch3": False,
         "cpp_std": "",
         "msvc_cpp_std": "",
+        "c90": False,
         "c99": False,
     }
     package_manager = ask(
@@ -221,8 +222,11 @@ VCPKG_ROOT environment variable to be setup to vcpkg's root directory.""",
         else:
             d["cpp_std"] = d["std"]
             d["msvc_cpp_std"] = d["std"] if d["std"] != "11" else "14"
-    if d["c"] and d["std"] != "90":
-        d["c99"] = True
+    if d["c"]:
+        if d["std"] == "90":
+            d["c90"] = True
+        else:
+            d["c99"] = True
     return d
 
 
